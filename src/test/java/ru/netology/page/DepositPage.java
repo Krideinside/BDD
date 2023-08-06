@@ -24,7 +24,6 @@ public class DepositPage {
         amountField.shouldBe(Condition.visible);
         fromField.shouldBe(Condition.visible);
         toField.shouldBe(Condition.visible);
-
     }
 
     //
@@ -34,21 +33,21 @@ public class DepositPage {
 //        } if (toField.shouldHave(Condition.text("0002"))) {
 //            return String DataHelper.getCardInfo().getCard1Number();
 //        }
-    public DashboardPage transferFrom1to2(int amount) {
+    public DashboardPage transfer(String cardNumber, int amount) {
         clearField();
         amountField.setValue(String.valueOf(amount));
-        fromField.setValue(DataHelper.getCardInfo().getCard1Number());
+        fromField.setValue(cardNumber);
         button.click();
         return new DashboardPage();
     }
-
-    public DashboardPage transferFrom2to1(int amount) {
-        clearField();
-        amountField.setValue(String.valueOf(amount));
-        fromField.setValue(DataHelper.getCardInfo().getCard2Number());
-        button.click();
-        return new DashboardPage();
-    }
+//
+//    public DashboardPage transferFrom2to1(int amount) {
+//        clearField();
+//        amountField.setValue(String.valueOf(amount));
+//        fromField.setValue(DataHelper.getCardInfo().getCard2Number());
+//        button.click();
+//        return new DashboardPage();
+//    }
 //
 //    public DashboardPage transferFrom1to2(int amount) {
 //            amountField.setValue(String.valueOf(amount);

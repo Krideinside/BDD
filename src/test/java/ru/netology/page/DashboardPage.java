@@ -2,13 +2,7 @@ package ru.netology.page;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import lombok.Value;
 import lombok.val;
-import ru.netology.data.DataHelper;
-
-import javax.lang.model.element.Element;
-
-import java.awt.*;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
@@ -57,5 +51,4 @@ public class DashboardPage {
         val value = text.substring(start + balanceStart.length(), finish);
         return Integer.parseInt(value);
     }
-
 }

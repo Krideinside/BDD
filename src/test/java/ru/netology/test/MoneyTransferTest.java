@@ -18,12 +18,12 @@ public class MoneyTransferTest {
         var verificationCode = DataHelper.getVerificationCodeFor(authInfo);
         var dashboardPage = verificationPage.validVerify(verificationCode);
         var depositPage = dashboardPage.addToCard1();
-        dashboardPage = depositPage.transferFrom1to2(500);
-        Assertions.assertEquals(9_500, dashboardPage.getFirstCardBalance() - 500);
-        Assertions.assertEquals(10_500, dashboardPage.getSecondCardBalance() + 500);
-       depositPage = dashboardPage.addToCard2();
-        depositPage.transferFrom2to1(700);
-        Assertions.assertEquals(10_700, dashboardPage.getFirstCardBalance() + 700);
-        Assertions.assertEquals(9_300, dashboardPage.getSecondCardBalance() - 700);
+       depositPage.transfer(DataHelper.getCard2Number(), 500);
+        Assertions.assertEquals(10_500, dashboardPage.getFirstCardBalance() + 500);
+        Assertions.assertEquals(9_500, dashboardPage.getSecondCardBalance() - 500);
+      dashboardPage.addToCard2();
+       depositPage.transfer(DataHelper.getCard1Number(),700);
+        Assertions.assertEquals(9_800, dashboardPage.getFirstCardBalance() - 700);
+        Assertions.assertEquals(10_200, dashboardPage.getSecondCardBalance() + 700);
     }
 }
