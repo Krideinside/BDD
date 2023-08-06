@@ -4,6 +4,7 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import lombok.Value;
 import lombok.val;
+import ru.netology.data.DataHelper;
 
 import javax.lang.model.element.Element;
 
@@ -25,6 +26,7 @@ public class DashboardPage {
         addButtons.first().click();
         return new DepositPage();
     }
+
     public DepositPage addToCard2() {
         addButtons.last().click();
         return new DepositPage();
@@ -49,7 +51,7 @@ public class DashboardPage {
         return extractBalance(text);
     }
 
-   public int extractBalance(String text) {
+    public int extractBalance(String text) {
         val start = text.indexOf(balanceStart);
         val finish = text.indexOf(balanceFinish);
         val value = text.substring(start + balanceStart.length(), finish);
