@@ -4,7 +4,9 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import ru.netology.data.DataHelper;
 import ru.netology.page.LoginPage;
+
 import static com.codeborne.selenide.Selenide.open;
+import static ru.netology.data.DataHelper.*;
 
 public class MoneyTransferTest {
 
@@ -13,17 +15,21 @@ public class MoneyTransferTest {
         open("http://localhost:9999");
 
         var loginPage = new LoginPage();
-        var authInfo = DataHelper.getAuthInfo();
+        var authInfo = getAuthInfo();
         var verificationPage = loginPage.validLogin(authInfo);
         var verificationCode = DataHelper.getVerificationCodeFor(authInfo);
         var dashboardPage = verificationPage.validVerify(verificationCode);
+        var expectedBalanceCard1 = dashboardPage.getFirstCardBalance();
+        var expectedBalanceCard2 = dashboardPage.getSecondCardBalance();
         var depositPage = dashboardPage.addToCard1();
-       depositPage.transfer(DataHelper.getCard2Number(), 500);
-        Assertions.assertEquals(10_500, dashboardPage.getFirstCardBalance() + 500);
-        Assertions.assertEquals(9_500, dashboardPage.getSecondCardBalance() - 500);
-      dashboardPage.addToCard2();
-       depositPage.transfer(DataHelper.getCard1Number(),700);
-        Assertions.assertEquals(9_800, dashboardPage.getFirstCardBalance() - 700);
-        Assertions.assertEquals(10_200, dashboardPage.getSecondCardBalance() + 700);
+        depositPage.transfer(getSecondCardInfo(), 500);
+        Assertions.assertEquals(expectedBalanceCard1 + 500, dashboardPage.getFirstCardBalance());
+        Assertions.assertEquals(expectedBalanceCard2 - 500, dashboardPage.getSecondCardBalance());
+        expectedBalanceCard1 = dashboardPage.getFirstCardBalance();
+        expectedBalanceCard2 = dashboardPage.getSecondCardBalance();
+        dashboardPage.addToCard2();
+        depositPage.transfer(getFirstCardInfo(), 700);
+        Assertions.assertEquals(expectedBalanceCard1 - 700, dashboardPage.getFirstCardBalance());
+        Assertions.assertEquals(expectedBalanceCard2 + 700, dashboardPage.getSecondCardBalance());
     }
 }

@@ -16,6 +16,15 @@ public class DashboardPage {
     private final String balanceStart = "баланс: ";
     private final String balanceFinish = " р.";
 
+//    public void depositToCard2Button() {
+//        buttons.last().click();
+////        new DepositPage();
+
+
+    public DashboardPage() {
+        header.shouldBe(visible);
+    }
+
     public DepositPage addToCard1() {
         addButtons.first().click();
         return new DepositPage();
@@ -26,14 +35,6 @@ public class DashboardPage {
         return new DepositPage();
     }
 
-//    public void depositToCard2Button() {
-//        buttons.last().click();
-////        new DepositPage();
-
-
-    public DashboardPage() {
-        header.shouldBe(visible);
-    }
 
     public int getFirstCardBalance() {
         val text = cards.first().text();

@@ -12,8 +12,10 @@ public class DataHelper {
         private String login;
         private String password;
     }
-    public static AuthInfo getAuthInfo() {
-        return new AuthInfo("vasya", "qwerty123");
+
+    @Value
+    public static class CardInfo {
+        String cardNumber;
     }
 
     @Value
@@ -21,14 +23,15 @@ public class DataHelper {
         private String code;
     }
 
+    public static CardInfo getFirstCardInfo() { return new CardInfo("5559 0000 0000 0001"); }
+
+    public static CardInfo getSecondCardInfo() { return new CardInfo("5559 0000 0000 0002"); }
+
+    public static AuthInfo getAuthInfo() {
+        return new AuthInfo("vasya", "qwerty123");
+    }
+
     public static VerificationCode getVerificationCodeFor(AuthInfo authInfo) {
         return new VerificationCode("12345");
     }
-        public static String getCard1Number() {
-            return new String("5559 0000 0000 0001");
-        }
-
-        public static String getCard2Number() {
-            return new String("5559 0000 0000 0002");
-        }
-    }
+}
